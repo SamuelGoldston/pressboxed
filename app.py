@@ -7,8 +7,14 @@ import os
 app = Flask(__name__)
 app.secret_key = 'your_super_secret_key_here'
 
-# Setup database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+# Correct Database Setup:
+if 'RENDER' in os.environ:
+    print("Running on Render: Using /tmp/site.db database")
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/site.db'
+else:
+    print("💻 Running Locally: Using site.db in project folder")
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
 db = SQLAlchemy(app)
 
 # Setup login manager
