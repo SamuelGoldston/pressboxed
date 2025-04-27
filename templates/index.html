@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MLB Games</title>
+    <style>
+        body { font-family: Arial; background-color: #f9f9f9; padding: 20px; }
+        table { border-collapse: collapse; width: 100%; background: white; }
+        th, td { text-align: center; padding: 12px; border: 1px solid #ddd; }
+        th { background-color: #131ddb; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        a.button {
+            background-color: #131ddb;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>MLB 2025 Season</h1>
+    <p><a href="/logout">Logout</a></p>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Away</th>
+            <th>Away Score</th>
+            <th>Home</th>
+            <th>Home Score</th>
+            <th>Venue</th>
+            <th>Review</th>
+        </tr>
+
+        {% for idx, game in games.iterrows() %}
+        <tr>
+            <td>{{ game['date'] }}</td>
+            <td>{{ game['team_away'] }}</td>
+            <td>{{ game['away_score'] }}</td>
+            <td>{{ game['team_home'] }}</td>
+            <td>{{ game['home_score'] }}</td>
+            <td>{{ game['venue'] }}</td>
+            <td>
+                <a class="button" href="{{ url_for('game_page', game_id=game['game_id']) }}">Review</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

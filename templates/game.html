@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leave a Review</title>
+</head>
+<body>
+    <h2>Leave Your Review</h2>
+    <form method="POST">
+        <label>Stars (1-5):</label><input type="number" name="stars" min="1" max="5" required><br>
+        <label>Review Text (max 280 chars):</label><br>
+        <textarea name="content" maxlength="280" rows="4" cols="50"></textarea><br>
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <h3>Existing Reviews:</h3>
+    {% for review in reviews %}
+    <p>⭐ {{ review.stars }}: "{{ review.content }}"</p>
+    {% endfor %}
+
+    <p><a href="/">← Back to Games</a></p>
+</body>
+</html>
