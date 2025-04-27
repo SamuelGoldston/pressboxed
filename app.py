@@ -12,7 +12,7 @@ if 'RENDER' in os.environ:
     print("Running on Render: Using /tmp/site.db database")
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/site.db'
 else:
-    print("💻 Running Locally: Using site.db in project folder")
+    print("Running Locally: Using site.db in project folder")
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)
@@ -89,7 +89,7 @@ def game_page(game_id):
         review = Review(user_id=current_user.id, game_id=game_id, stars=stars, content=content)
         db.session.add(review)
         db.session.commit()
-        flash('✅ Review Submitted!', 'success')
+        flash('Review Submitted!', 'success')
         return redirect(url_for('index'))
 
     all_reviews = Review.query.filter_by(game_id=game_id).all()
@@ -132,7 +132,7 @@ def signup():
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
-        flash('✅ Account created successfully. Please log in.', 'success')
+        flash('Account created successfully. Please log in.', 'success')
         return redirect(url_for('login'))
 
     return render_template('signup.html')
