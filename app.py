@@ -149,5 +149,13 @@ def logout():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Properly inside context
+        if not os.path.exists('/tmp/site.db') and 'RENDER' in os.environ:
+            print("Creating database for Render deployment...")
+            db.create_all()
+        elif not os.path.exists('site.db') and 'RENDER' not in os.environ:
+            print("Creating database for Local environment...")
+            db.create_all()
+        else:
+            print("Database already exists.")
+            
     app.run(host='0.0.0.0', port=5000)
